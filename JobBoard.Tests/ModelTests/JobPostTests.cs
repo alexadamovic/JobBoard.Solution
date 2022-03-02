@@ -1,11 +1,18 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using JobBoard.Models;
+using System;
+using System.Collections.Generic;
 
 namespace JobBoard.Tests
 {
   [TestClass]
-  public class JobPostTests
+  public class JobPostTests : IDisposable
   {
+    public void Dispose()
+    {
+      JobPost.ClearAll();
+    }
+
     [TestMethod]
     public void JobPostConstructor_CreatesInstanceOfJobPost_JobPost()
     {
@@ -54,15 +61,27 @@ namespace JobBoard.Tests
       CollectionAssert.AreEqual(myList, result);
     }
 
-    // [TestMethod]
-    // public void GetAll_ReturnsAllJobPostings_JobPost()
-    // {
-    //   JobPost myJobPost1 = new JobPost("title1", "description1", "contactInfo1");
-    //   JobPost myJobPost2 = new JobPost("title2", "description2", "contactInfo2");
-    //   JobPost myJobPost3 = new JobPost("title3", "description3", "contactInfo3");
-    //   List<JobPost> myList = new List<JobPost> {};
-    //   Assert.AreEqual();
-    // }
+    [TestMethod]
+    public void ClearAll_EmptiesInstancesList_JobPostList()
+    {
+      JobPost myJobPost1 = new JobPost("title1", "description1", "contactInfo1");
+      JobPost myJobPost2 = new JobPost("title2", "description2", "contactInfo2");
+      JobPost myJobPost3 = new JobPost("title3", "description3", "contactInfo3");
+      JobPost.ClearAll();
+      List<JobPost> emptyList = new List<JobPost> {};
+      List<JobPost> fullListOfJobs = JobPost.GetAll();
+      CollectionAssert.AreEqual(emptyList, fullListOfJobs);
+    }
+
+    [TestMethod]
+    public void GetAll_ReturnsAllJobPostings_JobPost()
+    {
+      JobPost myJobPost1 = new JobPost("title1", "description1", "contactInfo1");
+      JobPost myJobPost2 = new JobPost("title2", "description2", "contactInfo2");
+      JobPost myJobPost3 = new JobPost("title3", "description3", "contactInfo3");
+      List<JobPost> myList = new List<JobPost> { myJobPost1, myJobPost2, myJobPost3 };
+      CollectionAssert.AreEqual(myList, JobPost.GetAll());
+    }
     
   }
 }

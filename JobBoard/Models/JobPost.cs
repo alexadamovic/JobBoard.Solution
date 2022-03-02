@@ -13,11 +13,17 @@ namespace JobBoard.Models
       Title = title;
       Description = description;
       ContactInfo = contactInfo;
+      _instances.Add(this);
     }
 
     public static List<JobPost> GetAll()
     {
-      return List<JobPost> testList =;
+      return _instances;
+    }
+
+    public static void ClearAll()
+    {
+      _instances.Clear();
     }
   }
 }
