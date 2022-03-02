@@ -7,6 +7,22 @@
   </head>
   <body>
     <h1>Job Posts</h1>
+    @using JobBoard.Models;
+      @if (Model.Count == 0)
+      {
+        <p>There are no jobs available.</p>
+      }
+      <ul>
+        @foreach (JobPost post in Model)
+        {
+          <li><a href="/jobposts/@post.Id">@post.Title</li>
+        }
+      </ul>
+
     <a href='/jobposts/new'>Add a new job</a>
+
+    <form action="/jobposts/delete" method="post">
+      <button type="submit" name="button">Clear All Jobs</button>
+    </form>
   </body>
 </html>
