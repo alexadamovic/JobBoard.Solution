@@ -82,6 +82,22 @@ namespace JobBoard.Tests
       List<JobPost> myList = new List<JobPost> { myJobPost1, myJobPost2, myJobPost3 };
       CollectionAssert.AreEqual(myList, JobPost.GetAll());
     }
+
+    [TestMethod]
+    public void GetId_JobPostsInstantiateWithAnIdAndGetterReturns_Int()
+    {
+      JobPost myJobPost1 = new JobPost("title1", "description1", "contactInfo1");
+      int result = myJobPost1.Id;
+      Assert.AreEqual(1, result);
+    }
+    [TestMethod]
+    public void Find_ReturnsCorrectJobPost_JobPost()
+    {
+      JobPost myJobPost1 = new JobPost("title1", "description1", "contactInfo1");
+      JobPost myJobPost2 = new JobPost("title2", "description2", "contactInfo2");
+      JobPost result = JobPost.Find(2);
+      Assert.AreEqual(myJobPost2, result);
+    }
     
   }
 }
