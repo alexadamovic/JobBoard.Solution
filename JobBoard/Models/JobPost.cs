@@ -7,7 +7,7 @@ namespace JobBoard.Models
     public string Title { get; }
     public JobPost(string title)
     {
-      Title = "test";
+      Title = title;
     }
     
   }
