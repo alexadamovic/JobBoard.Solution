@@ -30,7 +30,7 @@ namespace JobBoard.Models
 
     public static JobPost Find(int searchId)
     {
-      return _instances[searchId];
+      return _instances[searchId-1];
     }
   }
 }
